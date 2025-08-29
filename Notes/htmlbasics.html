@@ -1,0 +1,54 @@
+<!--for template: ![tab] Emmet stuff is useful-->
+<!-- validation: validator.w3.org-->
+ <!--tree format, not all elements can be nested -->
+<!DOCTYPE html>
+<hmtl lang="en">
+    <head>
+        <!-- Adding style-->
+         <link rel="stylesheet" href="cssbasics.css">
+        <title>HTML Basics</title>
+    </head>
+
+    <body>
+        <!-- Tables -->
+        <table>
+            <th>Header 1</th> <!-- Table header -->
+            <tr> <!-- Table Row -->
+                <td>First option</td> <!-- Table data (cell) -->
+                <td colspan="2">Second Option</td> <!--rowspan also avail-->
+            </tr>
+        </table>
+
+        <!-- Web Forms -->
+        <h3>Form</h3>
+        <!--submit button triggers action-->
+        <form action="#" method="POST">
+            <!--for each input, give name for field otherwise ignored-->
+            <!--nesting lets you link-->
+            <label>
+                Input:<input type="text" name="first field" placeholder="Type something">
+            </label>
+            <!--password behaves differently-->
+            <!--another linking method-->
+            <label for="email-id">Email:</label>
+            <input id="email-id" type="email" name="email">
+
+            <!--dropdown-->
+            <label for="dropdown-menu">Select something</label>
+            <select id="dropdown-menu">
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+        <!--DIV AND SPAN-->
+        <!--used for grouping elements
+            div is block, span is inline
+            use ids for styling-->
+
+        <!--Semantic elements
+            header, footer, nav, main, article, section,
+            aside, figure, figcaption-->
+    </body>
+</hmtl>
