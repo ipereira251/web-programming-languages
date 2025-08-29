@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isabella Pereira</title>
+</head>
+<body>
+    <header>
+        <h1>Isabella Pereira</h1>
+        <nav>
+           <a href="#about">About</a> |
+           <a href="#projects">Projects</a> |
+           <a href="#contact">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <section id="about">
+            <h2>About</h2>
+            <p>
+                Hi! My name is Isabella Pereira. I'm a second-year Master's student at UTD. I am 
+                studying computer science with a concentration on cybersecurity.
+            </p>
+            <aside>
+                <p>
+                    I also enjoy crafts like knitting and crochet! My finished objects can be found 
+                    <a href="https://www.ravelry.com/projects/ipereira251?sort=rating_&view=large">here.</a>
+                </p>
+            </aside>
+            <figure>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mangos_-_single_and_halved.jpg/800px-Mangos_-_single_and_halved.jpg" 
+                alt="Placeholder image. One whole mango and one mango sliced in half on a plain grey background." width="300">
+                <figcaption>Really high resolution picture of mangoes.</figcaption>
+            </figure>
+        </section>
+        <section id="projects">
+            <h2>Projects</h2>
+            <article>
+                <h3>Comet Commerce</h3>
+                <p>
+                    Comet Commerce is a simple e-commerce website that adheres to the OWASP Top 10, 
+                    and has the beginnings of a Runtime Application Self-Protection or RASP system. 
+                    Rather than other e-commerce sites where vendors list their products, comet commerce 
+                    flips this on its head and instead intends to serve as a secure platform for customers to 
+                    commission products from vendors. 
+                    <a href="https://github.com/ipereira251/comet-commerce" target="_blank">Learn More</a>
+                </p>
+                <ul>
+                    <li>HTTPS support.</li>
+                    <li>CORS policy established.</li>
+                    <li>Event logs for added security.</li>
+                </ul>
+            </article>
+            <article>
+                <h3>PHI Redactor: De-identification Tool</h3>
+                <p>
+                    A Python-based tool designed to automatically remove and restore Protected Health Information 
+                    (PHI) from medical records using regular expressions. This app is built with Streamlit for a simple interface, 
+                    allowing users to upload medical text files, de-identify them by redacting sensitive information, 
+                    and later re-identify them by restoring original content using saved mappings. 
+                    <a href="https://github.com/ipereira251/phi-redactor" target="_blank">Learn More</a>
+                </p>
+                <ul>
+                    <li>Simple browser interface.</li>
+                    <li>Removes all 18 identifiers under HIPAA.</li>
+                    <li>Support for de- and re-identification.</li>
+                </ul>
+            </article>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <form>
+                <label for="name-in">Name: </label>
+                <input required id="name-in" type="text" name="name-in"> <br>
+
+                <label for="email-in">Email: </label>
+                <input required id="email-in" type="email" name="email-in"> <br>
+
+                <label for="msg-in">Message: </label>
+                <textarea required id="msg-in" name="msg-in" placeholder="Your message."></textarea> <br>
+
+                <button type="submit">Send message</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>
+            © Isabella Pereira, all rights reserved. 
+            <a href="https://github.com/ipereira251" target="_blank">GitHub</a>
+        </p>
+    </footer>
+</body>
+</html>
