@@ -1,0 +1,154 @@
+/*
+    Isabella Pereira, IAP200002
+    CS 6314.002, Fall 2025
+*/
+body{
+    background-color: rgb(184, 184, 184);
+    margin: 0px;
+}
+#container {
+    max-width: 800px; /*avoid wide paragraphs*/
+    margin: auto; /*center on screen*/
+    background-color: #e8def9; /*main site color*/
+}
+/*Accent text font*/
+h1, h2, h3, a{
+    font-family: Alegreya, 'Times New Roman', Times, serif;
+    padding: 0px 10px;
+}
+/*Main text font*/
+p, li, form, button, figcaption{
+    font-family: Alegreya Sans, 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0px 10px;
+}
+
+/*NAVBAR*/
+header {
+    position: sticky; /*top of screen always*/
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d1beef;
+    width: 100%;
+}
+/*Main title*/
+h1 {
+    margin: 0px;
+    padding: 10px;
+}
+nav {
+    display: flex;
+    align-items: center;
+}
+.navlink-box {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    height: 100%;
+}
+.navlink-box:hover {
+    background-color: #e8def9;
+}
+.navlink {
+    display: block;
+    margin: auto;
+    color: black;
+    text-align: center;
+    text-decoration: none; /*remove underline*/
+    height: 100%;
+}
+
+/*"About" section split into three sections*/
+#about {
+    display: grid;
+    height: 100%;
+    grid-template-areas: 
+    "title title title title title" /*header takes whole width*/
+    "main main main aside aside"; /*main 60%, aside 40%*/
+    gap: 10px;
+}
+#about-title {
+    grid-area: title; /*see above grid-template-areas*/
+    height: 10px;
+}
+#about-main {
+    grid-area: main; /*see above grid-template-areas*/
+    min-height: 100px;
+    min-width: 100px;
+    padding: 0px 0px 0px 15px;
+}
+
+/*ASIDE*/
+#aside-box {
+    padding: 0px 10px; /*padding on sides only, match height with the main about text*/
+}
+aside {
+    background-color: #d1beef;
+    grid-area: aside; /*see above grid-template-areas*/
+    min-height: 100px;
+    min-width: 50px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 25px; /*rounded corners*/
+}
+.ravelry-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding: 5px;
+}
+#self {
+    width: 100%;
+    max-width: 300px;
+}
+
+/*PROJECTS*/
+#project-articles {
+    display: flex;
+    flex-direction: column; /*top to bottom*/
+    gap: 10px;
+    padding: 10px;
+}
+article {
+    background-color: rgba(144, 238, 144, 0.854);
+    border-radius: 25px; /*rounded corners*/
+    padding: 10px;
+}
+h3 a {
+    padding: 0px;
+}
+
+/*CONTACT FORM*/
+.form-box{
+    padding: 10px;
+}
+form {
+    background-color: #d1beef;
+    border-radius: 25px; /*rounded corners*/
+    padding: 20px;
+}
+input, textarea {
+    display: inline-block;
+    width: 100%;
+    border: none;
+    border-radius: 5px; /*rounded corners*/
+    margin: 10px auto;
+    padding: 5px;
+}
+input:focus, textarea:focus {
+    border: 3px solid #9f70eb;
+}
+button {
+    border-radius: 5px; /*rounded corners*/
+    border: none;
+    margin: 4px 2px;
+    padding: 7px 10px;
+    font-size: 12px;
+}
+
+/*FOOTER*/
+footer {
+    padding: 10px;
+}
