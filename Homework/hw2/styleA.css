@@ -1,0 +1,56 @@
+/*
+    Isabella Pereira, IAP200002
+    CS 6314.002, Fall 2025
+*/
+html, body {
+    height: 100%;
+}
+h2 {
+    font-family: Tahoma;
+    font-size: 40px;
+    width: 100px;
+    text-align: center;
+}
+.top{
+    margin-top: 0px; /*push letters to top of box*/
+}
+.container{
+    display: flex;
+    flex-direction: column; /*stack letters vertically*/
+    height: 100%; /*all of page*/
+}
+
+/*A, C, E*/
+.dark{
+    display: flex;
+    flex-shrink: 0; /*box does not change size from specified*/
+    width: 100px;
+    height: 100px; 
+    margin: auto; /*horizontally center*/
+    background-color: #dfe1e7;
+    border: #687291 1px;
+    border-style: solid none none none; /*top only*/
+}
+/*B, D*/
+.light{
+    display: flex;
+    flex-shrink: 0; /*same size*/
+    width: 100px;
+    height: 100px; 
+    margin: auto; /*horizontally center*/
+    background-color: #eeeff2;
+    border: #687291 1px;
+    border-style: solid none none none; /*top only*/
+}
+/*F*/
+#box-f{
+    display: flex;
+    flex-shrink: 0; /*same size*/
+    align-items: center; /*vertically center in box*/
+    width: 100px;
+    height: 100px;
+    margin: auto; /*horizontally center*/
+    background-color: #687291;
+    border: black 4px;
+    border-style: solid;
+}

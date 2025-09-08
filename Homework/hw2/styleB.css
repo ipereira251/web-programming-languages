@@ -1,0 +1,33 @@
+/*
+    Isabella Pereira, IAP200002
+    CS 6314.002, Fall 2025
+*/
+h2{
+    font-family: Tahoma;
+    font-size: 40px;
+    padding: 10px;
+    margin-top: 0px;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(5, 110px); /*width of box + gap*/
+    gap: 10px;
+}
+.box{
+    height: 150px;
+    width: 100px;
+    background-color: #eeeff2;
+    border: #d0d0ff 10px;
+    border-style: none none none dotted; /*dotted border on left only*/
+}
+.box:hover{
+    cursor: pointer;
+    background-color: yellow;
+    color: goldenrod;
+}
+/*leave stuck to bottom right of screen*/
+#box-f{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}

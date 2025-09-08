@@ -1,0 +1,30 @@
+/*
+    Isabella Pereira, IAP200002
+    CS 6314.002, Fall 2025
+*/
+body{
+    background-color: #b0d3f7;
+}
+h2 {
+    font-family: Fleur De Leah, cursive; /*webfont, see <head> in index.html*/
+    font-size: 60px;
+    color: #2f664b;
+    text-align: center;
+    /*even horizontal/vertical shadows, white has blur radius of 5px*/
+    text-shadow: 5px 5px 5px white, 2px 2px goldenrod;
+}
+.container {
+    display: grid;
+    align-items: center;
+}
+.box{
+    height: 70px; /*size of letter + 10px gap*/
+    animation: swing 3s ease-in-out infinite; /*infinite swinging effect, ease to look natural*/
+}
+.dark {
+    animation-delay: -1.5s; /*every other letter offset*/
+}
+@keyframes swing {
+    0%, 100% {transform: rotate(-15deg);}
+    50%{transform: rotate(15deg);}
+}
