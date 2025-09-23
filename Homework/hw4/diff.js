@@ -56,14 +56,12 @@ function diff(oldVNode, newVNode, domNode) {
  
   // Case 4: Node type changed -> replace
   if(oldRealNode.type !== newRealNode.type){
-    domNode.parentElement.replaceChild(newVNode, domNode);
+    domNode.parentElement.replaceChild(newRealNode, domNode);
   }
  
   // Case 5: Update attributes
   if(oldVNode.props !== newVNode.props){
-    
     for (let i = 0; i < Math.max(oldVNode.props.length, newVNode.props.length); i++){
-      
       if(indexOf(oldVNode.props[i], newVNode.props) < 0){
         // remove old attributes not in new
         domNode.removeAttribute(i);
@@ -73,7 +71,6 @@ function diff(oldVNode, newVNode, domNode) {
         domNode.addAttribute(i);
       }
     }
-
   }
 
   // Recursively diff children

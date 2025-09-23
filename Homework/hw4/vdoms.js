@@ -133,4 +133,61 @@ const TEST_CASES = {
       ]
     }
   },
+  /* 
+   * Testing: original node type change, update props
+   */
+  4: {  
+    before: {
+      type: "h1", 
+      props: { class: "original" }, 
+      children: ["Heading"]
+    }, 
+    after: {
+      type: "h2", 
+      props: { class: "updated" }, 
+      children: ["Smaller heading"]
+    },
+  },
+  /*
+   * Testing: child node type change, element deletion, property inheritance
+   */
+  5: {
+    before: {
+      type: "div", 
+      props: { id: "root" }, 
+      children: [
+        { type: "h1", props: { class: "big-header" }, children: ["HERE IS A LARGE TITLE"] },
+        { type: "ul", 
+          props: {}, 
+          children: [
+            { type: "li", props: {}, children: ["1st"] }, 
+            { type: "li", props: {}, children: ["2nd"] },
+            { type: "li", props: {}, children: ["3rd"] },
+          ]
+        },
+        { type: "p", props: {}, children: ["This paragraph will disappear."] },
+        { type: "p", props: {}, children: ["And this one will transform!"] },
+      ]
+    }, after: {
+      type: "div", 
+      props: { id: "root" }, 
+      children: [
+        { type: "h5", props: { class: "small-header updated" }, children: ["Smaller Header"] },
+        { type: "ul", 
+          props: {}, 
+          children: [
+            { type: "li", props: {}, children: ["1st"] }, 
+            { type: "li", props: {}, children: ["3rd"] },
+          ]
+        },
+        { type: "ol",
+          props: { class: "updated"}, 
+          children: [
+            { type: "li", props: {}, children: ["list"] },
+            { type: "li", props: {}, children: ["items"] },
+          ] 
+        },
+      ]
+    },
+  },
 };
