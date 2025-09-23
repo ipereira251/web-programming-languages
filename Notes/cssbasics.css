@@ -1,4 +1,88 @@
 /*Link with html using element attr or classes*/
-h2{
-    
+.container {
+    background: lightcoral;
+    font-family: 'Courier New', Courier, monospace;
+    /* want to include alts so all browsers can view */
+    max-width: 750px; /*avoid wide paragraphs*/
+    margin: 0px auto; /*left/right top/bottom*/
+    /*check notes, missing padding??*/ 
+}
+body {
+    background: darkslategray;
+}
+main {
+    padding: 20px;
+    grid-row: 2;
+    grid-column: 2; 
+}
+header footer {
+    /*'color' determines font color*/
+    background: blanchedalmond;
+    color: blueviolet;
+    text-align: center;
+}
+header {
+    grid-row: 1;
+    grid-column: 1/3;
+}
+footer {
+    grid-row: 3;
+    grid-column: 1/3; 
+}
+aside {
+    border: 1px dotted black;
+}
+/*use class="" in the html*/
+.itemone {
+    font-size: 2rem;
+    color:blue;
+}
+h1 {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+h2 {
+    margin-top: 0px; /*only works if h1 margin-bottom is also 0*/
+    font-style: italic;
+}
+h3 {
+    margin-bottom: 0px;
+}
+.project {
+    border: black 1px dotted;
+    border-radius: 10px;
+    flex: 1 50px; /*individual project may grow, won't go below 50*/
+}
+.projects {
+    display: flex; /*projects now side-by-side, stretch vertically to height
+    of "projects" container*/
+    align-items: left;
+    justify-content: space-between; /*ONLY in flex, vs space-around*/
+    flex-direction: row; /*vs column*/
+    flex-flow: wrap-reverse; /*make projects wrap*/
+
+
+
+    /*
+    Flex: stretch vertically to height of "projects" container
+    */
+}
+.grid-ex {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    /*col 1: 100px, fractionally divide the rest between cols 2-3*/
+    gap: 5px;
+    grid-template-columns: repeat(3, 1fr); /*good for large #s of cols*/
+}
+/* pseudoselectors */
+a {}
+
+a:visited {
+
+}
+a:hover {
+
+}
+a:active{
+
 }

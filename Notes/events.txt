@@ -1,0 +1,41 @@
+Good for simple functionalities, only one handler at a time, overwrites everything else
+elem: DOM object
+<input id="button" type="button">
+<script>  (not camelcase!)
+    elem.onclick = function() {
+        alert("Click");
+    }
+    //or: 
+    elem.onClick () => alert("Click");
+</script>
+
+Best way: 
+element.addEventListener(event, handler, [options]);
+ex: 
+function() handlerName {
+    //stuff
+}
+[id].addEventListener("click", handlerName);
+
+to remove: pass same event handler as input
+
+When event occurs: 
+browser creates event object, fills in details, passes to handler as arg
+
+With no ids: 
+document.querySelector("h1").addEventListener('mouseover', function);
+
+Event attributes: 
+event.target.[]
+id, type, textContent, style.color, etc.
+
+Event bubbling (opposite: event capturing): 
+on event, run handlers on the event, then on event's ancestors recursively until root (document obj)
+target: original element that initiated event
+currentTarget: element currently running the handler 
+
+Class inheritance and object prototypes
+ex. rabbit._proto_ = animal; //rabbit will inherit from animal
+
+this.name [=] defining *new* property, used in constructor
+this._name [=] getter/setter, get existing property

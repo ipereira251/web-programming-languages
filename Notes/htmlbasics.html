@@ -5,50 +5,87 @@
 <hmtl lang="en">
     <head>
         <!-- Adding style-->
-         <link rel="stylesheet" href="cssbasics.css">
-        <title>HTML Basics</title>
+        <link rel="stylesheet" href="cssbasics.css">
+        <title>Basics</title>
     </head>
 
     <body>
-        <!-- Tables -->
-        <table>
-            <th>Header 1</th> <!-- Table header -->
-            <tr> <!-- Table Row -->
-                <td>First option</td> <!-- Table data (cell) -->
-                <td colspan="2">Second Option</td> <!--rowspan also avail-->
-            </tr>
-        </table>
+        <div class="container"> <!--good for styling-->
+            <header>
+                <h1>Site Title</h1>
+                <h2>tagline</h2>
+                <!-- margin collapsing: margins overlap-->
+            </header>
+            <!-- Tables -->
+            <table>
+                <th>Table header 1</th> <!-- Table header -->
+                <tr> <!-- Table Row -->
+                    <td class="itemone">First option</td> <!-- Table data (cell) -->
+                    <td colspan="2">Second Option</td> <!--rowspan also avail-->
+                </tr>
+                <tr> <!-- Table Row -->
+                    <td>Third option</td>
+                    <td colspan="2">Fourth Option</td> 
+                </tr>
+            </table>
 
-        <!-- Web Forms -->
-        <h3>Form</h3>
-        <!--submit button triggers action-->
-        <form action="#" method="POST">
-            <!--for each input, give name for field otherwise ignored-->
-            <!--nesting lets you link-->
-            <label>
-                Input:<input type="text" name="first field" placeholder="Type something">
-            </label>
-            <!--password behaves differently-->
-            <!--another linking method-->
-            <label for="email-id">Email:</label>
-            <input id="email-id" type="email" name="email">
+            <!-- Web Forms -->
+            <h3>Form</h3>
+            <!--submit button triggers action-->
+            <form action="#" method="POST">
+                <!--for each input, give name for field otherwise ignored-->
+                <!--nesting lets you link-->
+                <label>
+                    Input:<input type="text" name="first field" placeholder="Type something">
+                </label> <br>
+                <!--password behaves differently-->
+                <!--another linking method-->
+                <label for="email-id">Email:</label>
+                <input id="email-id" type="email" name="email"> <br>
 
-            <!--dropdown-->
-            <label for="dropdown-menu">Select something</label>
-            <select id="dropdown-menu">
-                <option>Option 1</option>
-                <option>Option 2</option>
-            </select>
+                <!--dropdown-->
+                <label for="dropdown-menu">Select something</label>
+                <select id="dropdown-menu">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+                <br>
+                <button type="submit">Submit</button>
+            </form>
+            <!--DIV AND SPAN-->
+            <!--used for grouping elements
+                div is block, span is inline
+                use ids for styling-->
 
-            <button type="submit">Submit</button>
-        </form>
-        <!--DIV AND SPAN-->
-        <!--used for grouping elements
-            div is block, span is inline
-            use ids for styling-->
+            <!--Semantic elements
+                header, footer, nav, main, article, section,
+                aside, figure, figcaption-->
 
-        <!--Semantic elements
-            header, footer, nav, main, article, section,
-            aside, figure, figcaption-->
+            <!-- BOX VS BORDER BOX -->
+
+
+             <div class="projects">
+                <article class="project">
+                    <h3>Project 1</h3>
+                    <p>This is a description.</p>
+                </article>
+                <article class="project">
+                    <h3>Project 2</h3>
+                    <ul>
+                        <li>Feature 1</li>
+                        <li>Another feature!</li>
+                    </ul>
+                </article>
+             </div>
+
+             <!--Grid-->
+             <div class="grid-ex">
+                <button class="grid-button">Button 1</button>
+                <button class="grid-button">Button 2</button>
+                <button class="grid-button">Button 3</button>
+                <button class="grid-button">Button 4</button>
+                <button class="grid-button">Button 5</button>
+             </div>
+         </div>
     </body>
 </hmtl>
