@@ -1,0 +1,39 @@
+<html>
+<head> 
+</head>
+<body>
+  <script>
+    function loadScript(src) {
+      let script = document.createElement('script');
+      script.src = src;
+      document.head.append(script);
+    }
+    loadScript(' ./myscript.js'); 
+    // the script has "function sayHi() {…}"
+
+    sayHi(); //doesn't work, doesn't wait, reading from disk takes long time
+   
+  </script>
+
+***callback for asychronous background functions
+function loadScript(src, callback) {
+      let script = document.createElement('script');
+      script.src = src;
+      ** script.onload = () => callback();
+      document.head.append(script);
+}
+nested callbacks for sequential asych functions
+Problem: super nested callbacks, pyramid of doom
+Solution: promise, connected to asych function for appending additional functions
+let p1 = new Promise(function(resolve, reject){
+    setTimeout(() => resolve("done"), 1000)
+});
+p1.then(() => alert()); //will occur after p1 is complete
+p2.catch((error) => alert(error)); //once error object is caught
+
+let p = fetch('jsonplaceholder.typicode.com/users'); //debugger shows all data :O 
+
+fetch('jsonplaceholder.typicode.com/users')
+.then(res => res.json()) //second event
+.then(data => console.log(data)) //third event 
+.catch(err => console.log(err)) //error handling always
