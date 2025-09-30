@@ -37,3 +37,27 @@ fetch('jsonplaceholder.typicode.com/users')
 .then(res => res.json()) //second event
 .then(data => console.log(data)) //third event 
 .catch(err => console.log(err)) //error handling always
+
+for many promises at once: 
+Promise.all([
+  new Promise ...
+  new Promise ...
+  new Promise ...
+]).then(alert());
+
+Await: 
+let result = await promise;
+alert(result);
+only works inside an async function
+
+async function awaitFunction(){
+  const res = await fetch(...);
+  const data = await json...
+  ...
+}
+awaitFunction;
+
+Create anonymous function and call it:
+(async () => {
+  ...
+})();

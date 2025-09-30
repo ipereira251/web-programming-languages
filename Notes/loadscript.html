@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+</head>
+
+<body>
+    <script>
+    function loadScript(src) {
+        return new Promise(function(resolve, reject) {
+            let script = document.createElement('script');
+            script.src = src;
+
+            //est promise
+            script.onload = () => resolve(script);
+            script.onerror = () => reject(new Error (`Script load error for ${src}`));
+
+            document.head.append(script);
+        });
+      
+    }
+    loadScript(' ./myscript.js')
+    .then((script) => {
+        sayHi();
+        alert(script.src);
+    })
+    .catch(error => console.log(error));
+    // the script has "function sayHi() {…}"
+
+    sayHi(); 
+  </script>
+
+</body>
+</html>

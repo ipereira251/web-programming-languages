@@ -1,0 +1,19 @@
+HTTP: Hypertext Transfer Protocol
+client inits request, server sends response
+**Cool layer graphic in http slides
+
+Stateless, not sessionless
+TCP-based
+
+HTTP request message:
+[method] [path] [protocol version] [headers]
+GET / HTTP/1.1 Host: ... Accept-Language: ...
+
+HTTP response message: 
+[protocol version] [status code] [status message] [headers]
+HTTP/1.1 200 OK date: ... cache-control: ...
+
+In dev tools: network tab
+etag: hash value
+
+see postMsg.html
