@@ -1,0 +1,75 @@
+.calendar{
+    width: 330px;
+    padding: 10px 10px 20px 10px;
+    background-color: #e6f2f4;
+    border-radius: 10px;
+    border: 2px;
+    border-color: darkblue;
+    border-style: solid;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: darkblue;
+}
+h2{
+    margin: 0px auto;
+}
+.cal-header{
+    text-align: center;
+    display: flex;
+}
+.left{
+    margin: 0px 0px auto 10px;  
+}
+.right{
+    margin: 0px 10px auto 0px;
+}
+.left:hover, .right:hover{
+    cursor: pointer;
+}
+.cal-body{
+    width: fit-content;
+    margin: 0 auto;
+}
+.weekdays{
+    width: 308px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    margin: 10px 0px;
+}
+.weekday{
+    flex: 0 0 40px;
+    box-sizing: border-box;
+    text-align: center;
+    margin: auto 2px;
+}
+.dates{
+    width: 308px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.date{
+    flex: 0 0 40px;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 15px 0px;    
+    border: 1.5px;
+    border-style: dotted;
+    border-radius: 3px;
+    border-color: darkblue;
+    margin: 2px;
+    background-color: #dff7ff;
+}
+.date:nth-child(7n+1), .date:nth-child(7n+3), .date:nth-child(7n+5), .date:nth-child(7n){
+    background-color: white;
+}
+.date.curr:hover{
+    background-color: gold;
+    border-color: goldenrod;
+    cursor: pointer;
+}
+.date.prev, .date.next {
+    background-color: rgb(225, 225, 225);
+    border-color: gray;
+    cursor: default;
+}
