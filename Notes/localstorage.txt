@@ -1,0 +1,6 @@
+localStorage.clear() in console
+const array = [1, 2, 3, 4];
+localStorage.setItem("array": a);
+localStorage.getItem("array"); //spec key, array stored as string
+
+is which circumstances is local storage persistent? 

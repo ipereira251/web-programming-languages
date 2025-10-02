@@ -1,0 +1,7 @@
+npm create vite@latest [] -- --template react
+
+app entrypoint is index.html with defined root, everything else mounted to it
+
+jsx = js with html
+
+npm run dev -- --open --port [] //not strictly needed

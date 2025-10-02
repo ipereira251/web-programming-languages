@@ -61,3 +61,11 @@ Create anonymous function and call it:
 (async () => {
   ...
 })();
+
+REST: Representation State Transfer
+Web API style
+
+Principles: 
+Client server, separation of concerns, no(!!) server-side rendering, plain data is sent
+Stateless, standalone requests, no history
+Uniform interface, http verbs with resource urls 

@@ -17,3 +17,7 @@ In dev tools: network tab
 etag: hash value
 
 see postMsg.html
+
+fetch by default is GET, to modify use options = { method: "POST", body: JSON.stringify(...), 
+    headers: { "Content-type": "application/json" } };
+fetch([url-here], options);
