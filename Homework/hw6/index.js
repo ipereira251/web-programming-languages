@@ -22,8 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(data => {
         if(data.Response === "True")
           displayMovieCards(data);
-        else 
-          console.error(data.Error);})
+        else {
+          console.error(data.Error);
+          const messageBar = document.getElementById("message-bar");
+          messageBar.textContent = null;
+          const movieList = document.getElementById("movie-list");
+          movieList.textContent = null;
+          messageBar.innerHTML += "<h2>No titles found.</h2>";
+        }
+      })
       .catch(error => console.error(error));
     });
   } 
@@ -65,6 +72,8 @@ function getHTML(titleData, add){
 
 //display movie cards
 function displayMovieCards(data){
+  const messageBar = document.getElementById("message-bar");
+  messageBar.textContent = null;
   const movieList = document.getElementById("movie-list");
   movieList.textContent = null;
   for(let i = 0; i < data.Search.length; i++){
@@ -76,8 +85,8 @@ function displayMovieCards(data){
     } else
       console.error(titleData.Error);})
     .catch(error => console.error(error));
+    connectAddButtons();
   }
-  connectAddButtons();
 }
 function connectAddButtons(){
   var imdbID = null;
