@@ -5,3 +5,31 @@ app entrypoint is index.html with defined root, everything else mounted to it
 jsx = js with html
 
 npm run dev -- --open --port [] //not strictly needed
+
+Hooks: 
+useState() to create states
+import { useState } from "react";
+...
+const [task, setTask] = useState(''); //task shows state, to change state, use setTask() for automatic rerendering
+
+function handleChange(event){
+    console.log(event.target.value);                  
+    setTask(event.target.value);                       Γ  to display changes on submit   
+}                                                      v 
+.... <input type="text" onChange=(handleChange) value=(task) />
+
+component list:
+let taskList = [<ListTask key="" name="eat"/> <ListTask name="sleep"/>]
+
+    //filters: ["all", "active", "completed"]
+... const taskComponents = taskList.map((task) => <ListTask id={task.id} name={task.name}) key={task.id} status={task.completed}/>);
+... <ul>
+    {taskComponents}
+    </ul>
+const [taskList, setTaskList] = useState([]);
+... function addTask(name){
+        const newTask = {id:`todo-${name}`, name, completed:false};
+        setTaskList([...taskList, newTask]);
+    }
+
+if attribute is used by several components, must belong to their common ancestor
