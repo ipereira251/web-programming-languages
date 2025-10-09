@@ -1,0 +1,15 @@
+complete reload to another page, lose react state
+single page app, client-side rendering: 
+--req homepage->
+<--<App />--
+
+---data req-->
+<---json----
+
+routing: render different components based on URL
+don't use <a>, use <Link> from React
+<BrowserRouter>
+    <App />
+</BrowserRouter>
+
+nested routes?

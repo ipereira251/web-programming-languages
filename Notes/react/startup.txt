@@ -33,3 +33,16 @@ const [taskList, setTaskList] = useState([]);
     }
 
 if attribute is used by several components, must belong to their common ancestor
+
+const [count, setCount] = React.useState(0);
+setCount(count); //infinite loop
+return{
+    <p>{count}</p>
+}
+
+avoid infinite loop:
+syncing w outside world should be side effect
+useEffect(function(){ //what function needs to be called on first render?
+    fetch(...)
+    .then(...)
+}, []) //2nd arg: dependency, empty: no change between renders
