@@ -1,0 +1,17 @@
+npm install -g typescript
+tsc index.ts //to compile, will create a js file
+node index.js //to run
+tsc -w //watch mode
+
+
+typescript playground for demo
+
+syntax: 
+let courseName: string "WPL";
+arr.push()
+.pop() removes from end of array
+.shift() removes from beginning
+.unshift() add to beginning
+
+to print array: 
+`${studentNames.join(" ")}`

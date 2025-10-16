@@ -1,0 +1,43 @@
+/*
+  px
+  em 
+  rem 
+  %
+*/
+html{
+  width: 100%; /*screen size*/
+  font-size: 16px;
+}
+.container{
+  width: 80%;
+  padding: 20px;
+  background-color: aliceblue;
+  font-size: 20px;
+}
+.px{
+  font-size: 32px;
+}
+.em{ /* relating to parent's font size */
+  font-size: 2em;
+}
+.rem{ /* relating to root font size */
+  font-size: 2rem;
+}
+.per{ /* relating to parent */
+  font-size: 60%;
+}
+/* media queries 
+  desktop 1024+ px
+  tablet 
+  mobile */
+  @media(max-width: 600px){ /*media queries take precedence*/
+    .container{
+      display: flex;
+      background-color: blueviolet;
+      flex-direction: row;
+    }
+    .em{
+      display: none;
+    }
+  }
+/*breaking point, ex: container stops taking 80% of screen, side scroll */
