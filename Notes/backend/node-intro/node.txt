@@ -1,0 +1,7 @@
+Node
+non-blocking I/O operations
+Javascript runtime environment
+
+run: npm init -------------------- creates package.json :O
+  type: module (more modern version)
+  added 'start' line
