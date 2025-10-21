@@ -3,9 +3,11 @@ non-blocking I/O operations
 singlethreaded
 Javascript runtime environment
 
+On creating a new folder:
 run: npm init -------------------- creates package.json :O
   type: module (more modern version)
   added 'start' line
+then: npm install express
 
 singlethreadedness -> event queue
 Express event priorty: 
