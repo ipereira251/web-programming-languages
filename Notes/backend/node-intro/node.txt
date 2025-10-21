@@ -1,7 +1,19 @@
 Node
 non-blocking I/O operations
+singlethreaded
 Javascript runtime environment
 
 run: npm init -------------------- creates package.json :O
   type: module (more modern version)
   added 'start' line
+
+singlethreadedness -> event queue
+Express event priorty: 
+  timers
+  pending callbacks
+  idle, prepare
+  poll
+  check
+  close callbacks
+handle all timers in first queue before moving to pending queue
+starvation possible, limit number of events completed before moving on
