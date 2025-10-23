@@ -9,6 +9,12 @@ import {
 
 import './styles.css';
 
+
+/* components/UserList component should provide navigation to the user 
+details of all the users in the system. The component is embedded in 
+the side bar and should provide a list of user names so that when a name 
+is clicked, the content view area switches to display the details of that user.  */
+
 function UserList() {
   return (
     <div>

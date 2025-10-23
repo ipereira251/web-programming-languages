@@ -5,6 +5,11 @@ import { Typography } from '@mui/material';
 
 import './styles.css';
 
+/* components/UserDetail component is passed a userId in the props by 
+React Router. The view should display the details of the user in a 
+pleasing way along with a link to switch the view area to the photos 
+of the user using the UserPhotos component. */
+
 function UserDetail({ userId }) {
   return (
     <Typography variant="body1">
