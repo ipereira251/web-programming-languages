@@ -30,6 +30,7 @@ function PhotoShare() {
   return (
     <BrowserRouter basename="/photo-share.html">
       <div>
+        <p>hello</p>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TopBar />
@@ -42,8 +43,8 @@ function PhotoShare() {
           </Grid>
           <Grid item sm={9}>
             <Paper className="main-grid-item">
-              <Routes>
-                <Route
+              <Routes> 
+                {/*<Route
                   path="/"
                   element={(
                     <Typography variant="body1">
@@ -67,7 +68,7 @@ function PhotoShare() {
                       you get started.
                     </Typography>
                   )}
-                />
+                />*/}
                 <Route path="/users/:userId" element={<UserDetailRoute />} />
                 <Route path="/photos/:userId" element={<UserPhotosRoute />} />
                 <Route path="/users" element={<UserList />} />

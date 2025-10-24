@@ -32,6 +32,6 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "vite": "^7.1.11"
+    "vite": "^7.1.12"
   }
 }

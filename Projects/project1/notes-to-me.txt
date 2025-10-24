@@ -1,0 +1,2 @@
+npm run dev in main project directory
+make sure vite installed on computer lab computers
