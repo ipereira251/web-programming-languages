@@ -1,6 +1,11 @@
 //npm init, npm install express
 import express from 'express'; //old way: require(express)
 
+//express is unopinionated framework for Node
+//unopinionated: no strict way of using, angular is opinionated
+
+//express app is series of middleware function calls
+
 const app = express();
 const port = 3000;
 
