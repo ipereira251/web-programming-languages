@@ -18,9 +18,12 @@ import './styles.css';
 function TopBar() {
   return (
     <AppBar className="topbar-appBar" position="absolute">
-      <Toolbar>
-        <Typography variant="h5" color="inherit">
-          This is the TopBar component
+      <Toolbar className='topbar-toolbar'>
+        <Typography variant="h5" color="inherit" className="topbar-name">
+          Isabella Pereira
+        </Typography>
+        <Typography variant="h5" color="inherit" className="topbar-content">
+          Context here pls
         </Typography>
       </Toolbar>
     </AppBar>
