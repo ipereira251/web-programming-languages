@@ -28,7 +28,7 @@ function UserPhotosRoute() {
 
 function PhotoShare() {
   return (
-    <BrowserRouter basename="/photo-share.html">
+    <BrowserRouter>
       <div>
         <p>hello</p>
         <Grid container spacing={2}>

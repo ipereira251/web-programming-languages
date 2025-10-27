@@ -9,6 +9,7 @@ import {
 
 import './styles.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 /* components/UserList component should provide navigation to the user 
@@ -18,9 +19,7 @@ is clicked, the content view area switches to display the details of that user. 
 
 function UserList() {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -31,30 +30,18 @@ function UserList() {
           console.log(response.data);
           console.log("Fetched users.");
         } else {
-          setError("No users found.");
           console.error("No users found.");
         }
       } catch (err) {
-        setError("Failed to fetch users.");
         console.error("Error fetching users: ", err);
-      } finally {
-        setLoading(false);
       }
     };
     fetchResults();
   }, []);
 
-  if (loading) {
-    return <div>Loading users...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
-
   const handleUserClick = (user) => {
     console.log("Clicked on:", user.first_name, user.last_name, user._id);
-    setSelectedUser(user);
+    navigate(`/users/${user._id}`);
   }
 
   return (
