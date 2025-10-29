@@ -1,0 +1,16 @@
+Mongoose: Object Definition Language (ODL)
+takes familiar ODM usage, map onto MongoDB
+front-end --> express --> mongoose --> MongoDB
+vertical expansion: get better server
+horizontal expansion: just add more servers
+
+schema defines structure of *documents* in a *collection*
+  needed for mongoose to perform validation; MongoDB doesn't care
+  const Schema = mongoose.Schema;
+  const userSchema = new Schema({name: String, age: Number});
+  const User = mongoose.model('User', userSchema); //users collection, auto-pluralizes
+
+  const u = new User({ name: "Maya", age: 21 }); //created using model
+  await u.save() //adds document to MongoDB, mongoose handles validation before saving
+
+model: interface to access MongoDB collection
