@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import {
   Divider,
   List,
@@ -51,12 +51,12 @@ function UserList() {
     <div>
       <List component="nav">
         {users.map(user => (
-          <>
-            <ListItemButton key={user.id} onClick={() => handleUserClick(user)}>
+          <React.Fragment key={user._id}>
+            <ListItemButton onClick={() => handleUserClick(user)}>
               <ListItemText primary={user.first_name + " " + user.last_name} />
             </ListItemButton>
-            <Divider />
-          </>
+            <Divider/>
+          </React.Fragment>
         ))}
       </List>
     </div>

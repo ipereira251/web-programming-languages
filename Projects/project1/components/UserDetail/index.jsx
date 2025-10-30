@@ -40,7 +40,7 @@ function UserDetail({ userId }) {
   };
 
   if(!user){
-    return <p>No such user found</p>;
+    return <p>No such user found.</p>;
   }
 
   return (
@@ -49,21 +49,13 @@ function UserDetail({ userId }) {
       <Typography variant="h5">
         {user.first_name} {user.last_name}
       </Typography>
-      <Typography variant="body">
-        "{user.description}"
-
-        {/* Location occupation */}
+      <Typography variant="h6" className="user-occ-loc">
+        {user.occupation} from {user.location}.
+      </Typography>
+      <Typography variant="body1" className="user-desc">
+        {user.description}
       </Typography>
     </div>
-    <Typography variant="body1">
-      This should be the UserDetail view of the PhotoShare app. Since it is
-      invoked from React Router the params from the route will be in the
-      property userId. So this should show details of user:
-      {' '}
-      {userId}
-      . You can
-      fetch the model for the user from API: /user/:id
-    </Typography>
     <Button variant="contained" onClick={() => handleViewImgClick()}>View {user.first_name}'s images</Button>
     </>
     

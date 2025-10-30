@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { Typography, ImageListItem, Card, CardContent, Button } from '@mui/material';
+import { Typography, ImageListItem, Card, CardContent, Button, Divider } from '@mui/material';
 
 import './styles.css';
 import axios from 'axios';
@@ -85,7 +85,7 @@ function UserPhotos({ userId }) {
       case "11": ret += "November"; break;
       case "12": ret += "December"; break;
     }
-    ret += ` ${dateInfo[2]}, ${dateInfo[0]}`;
+    ret += ` ${dateInfo[2]}, ${dateInfo[0]}`; //TODO: take zero off of single-digit nums
     if(timeInfo[0] > 0 && timeInfo[0] < 13){
       ret += ` at ${timeInfo[0]}:${timeInfo[1]} am`;
     }
@@ -99,41 +99,44 @@ function UserPhotos({ userId }) {
 
   return (
     <div className="image-container">
-      {photos.map(photo => (
-        <div key={photo._id}> 
-          <ImageListItem key={photo._id}>
-            <img 
-              src={`../images/${photo.file_name}`}
-              alt={photo.file_name}
-            />
-          </ImageListItem>
-          <Typography variant="p" className="date-time">
-            Posted {formatDate(photo.date_time)}.
-          </Typography>
-          {photo.comments ? (
-            <Card variant="outlined" className="comment">
-              <CardContent>
-                {photo.comments.map(comment => (
-                  <div key={comment._id}>
-                    <Button variant="text" className="user-name"
-                      onClick={() => handleButtonClick(comment.user._id)}>
-                      {comment.user.first_name} {comment.user.last_name}
-                    </Button>
-                    <Typography variant="p" noWrap="true" className="date-time">
-                      {formatDate(comment.date_time)}
-                    </Typography>
-                    <Typography variant="body1">{comment.comment}</Typography>
- 
-                  </div>
-                ))}
-              </CardContent>
-            </Card> 
-          ) : (
-            <Typography variant="body2" className="no-comment-text">No comments found.</Typography>
-          )}
+      {photos.map((photo, index) => (
+        <>
+        <div key={photo._id}>
+            <CardContent>
+              <div className="image-section">
+                <img 
+                  src={`../images/${photo.file_name}`}
+                  alt={photo.file_name}
+                /> 
+                <Typography variant="body2" className="date-time">
+                  Posted {formatDate(photo.date_time)}.
+                </Typography>
+              </div>
+              <div className="comment-section">
+                <Typography variant="h5">Comments</Typography>
+                {photo.comments ? (
+                  photo.comments.map(comment => (
+                    <div key={comment._id} className="comment-indiv"> 
+                      <Button variant="text" className="user-name-button"
+                        onClick={() => handleButtonClick(comment.user._id)}>
+                        {comment.user.first_name} {comment.user.last_name}
+                      </Button>
+                      <Typography variant="p" noWrap={true} className="date-time date-time-comment">
+                        {formatDate(comment.date_time)}
+                      </Typography>
+                      <Typography variant="body1">{comment.comment}</Typography>
+                    </div>
+                  ))
+                ) : (
+                  <Typography variant="body2" className="no-comment-text">No comments found.</Typography>
+                )}
+              </div>
+            </CardContent>
         </div>
+        {index < photos.length - 1 && <Divider />}
+        </>
       ))}
-    </div>    
+    </div>   
   );
 }
 

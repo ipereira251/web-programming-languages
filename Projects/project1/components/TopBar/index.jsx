@@ -28,22 +28,22 @@ function TopBar() {
   const getUserFromUrl = async (url) => {
     const terms = url.split("/");
     console.log("terms", terms);
-    try {
-      const response = await axios.get(`/user/${terms[2]}`);
-      if(response.data){
-        console.log("response data", response.data);
-        if(terms[1] === "photos"){
-          setContext(`Photos of ${response.data.first_name} ${response.data.last_name}`);
-        } else if(terms[1] === "users"){
-          setContext(`${response.data.first_name} ${response.data.last_name}`);
-        } else {
-          setContext("Unknown");
+    if(terms[1]){
+      try {
+        const response = await axios.get(`/user/${terms[2]}`);
+        if(response.data){
+          console.log("response data", response.data);
+          if(terms[1] === "photos"){
+            setContext(`Photos of ${response.data.first_name} ${response.data.last_name}`);
+          } else if(terms[1] === "users"){
+            setContext(`${response.data.first_name} ${response.data.last_name}`);
+          } else {
+            setContext("Unknown");
+          }
         }
-      }
-    } catch(err){
-      console.error("Error getting user from URL", err);
-    }
-    
+      } catch(err){
+        console.error("Error getting user from URL", err);
+      }}
   };
 
   return (

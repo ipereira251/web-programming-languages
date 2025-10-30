@@ -177,7 +177,7 @@ const photo9 = {
 
 const photo10 = {
   _id: '57231f1a30e4351f4e9f4be6',
-  date_time: '2013- need12-03 09:03:00',
+  date_time: '2013-12-03 09:03:00',
   file_name: 'took2.jpg',
   user_id: pt._id,
 };
