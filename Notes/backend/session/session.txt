@@ -1,0 +1,11 @@
+A session is a temporary stateful interaction between client/server
+Components: 
+  Temporary storage
+  Client-specific
+  Persistance across requests
+
+Cookies: 
+  state set by server is attached to every request by browser
+  set-cookie field in HTTP request, gives state info as (state, value) pair
+
+Example in todo_db's app.js

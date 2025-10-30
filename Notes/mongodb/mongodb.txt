@@ -14,3 +14,11 @@ schema defines structure of *documents* in a *collection*
   await u.save() //adds document to MongoDB, mongoose handles validation before saving
 
 model: interface to access MongoDB collection
+
+Steps: 
+define route
+import function from controller
+write function in controller
+
+indexing to improve search performance
+name: {type: String, unique: true}
