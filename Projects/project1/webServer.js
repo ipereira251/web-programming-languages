@@ -62,8 +62,11 @@ app.get('/user/:id', (req, res) => {
   const toRet = models.userModel(id);
   if(toRet)
     res.status(200).send(toRet);
-  else 
-    res.status(404);
+  else {
+    res.status(404).send("User not found");
+    console.log("User not found");
+  }
+    
 });
 
 /**
@@ -75,8 +78,11 @@ app.get('/photosOfUser/:id', (req, res) => {
   const toRet = models.photoOfUserModel(id);
   if(toRet)
     res.status(200).send(toRet);
-  else 
-    res.status(404);
+  else {
+    res.status(404).send("No photos found");
+    console.log("No photos found.")
+  }
+    
 });
 
 const server = app.listen(portno, () => {

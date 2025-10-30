@@ -1,7 +1,6 @@
 import { React, useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { Typography, ImageListItem, Card, CardContent, Button, Divider } from '@mui/material';
+import { Typography, CardContent, Button, Divider } from '@mui/material';
 
 import './styles.css';
 import axios from 'axios';
@@ -38,8 +37,8 @@ function UserPhotos({ userId }) {
     try {
      const response = await axios.get(`http://localhost:3001/user/${userId}`);
       if(response.data){
-        console.log(response.data);
         setUser(response.data);
+        console.log("Fetched", user.first_name, user.last_name);
       }
     } catch (err){
       console.error("Error fetching user info: ", err);
@@ -85,7 +84,7 @@ function UserPhotos({ userId }) {
       case "11": ret += "November"; break;
       case "12": ret += "December"; break;
     }
-    ret += ` ${dateInfo[2]}, ${dateInfo[0]}`; //TODO: take zero off of single-digit nums
+    ret += ` ${dateInfo[2]}, ${dateInfo[0]}`; 
     if(timeInfo[0] > 0 && timeInfo[0] < 13){
       ret += ` at ${timeInfo[0]}:${timeInfo[1]} am`;
     }

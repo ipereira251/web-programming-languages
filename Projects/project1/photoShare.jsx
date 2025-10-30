@@ -1,7 +1,6 @@
 import React from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import ReactDOM from 'react-dom/client';
-import { Grid, Typography, Paper } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import {
   BrowserRouter, Route, Routes, useParams,
 } from 'react-router-dom';

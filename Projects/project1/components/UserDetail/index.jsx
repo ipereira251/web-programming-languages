@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { Typography, Button } from '@mui/material';
 
@@ -9,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 /* components/UserDetail component is passed a userId in the props by 
 React Router. The view should display the details of the user in a 
-pleasing way ---Details done
+pleasing way ---DONE
 along with a link to switch the view area to the photos 
 of the user using the UserPhotos component. ----DONE
 */
@@ -56,7 +55,7 @@ function UserDetail({ userId }) {
         {user.description}
       </Typography>
     </div>
-    <Button variant="contained" onClick={() => handleViewImgClick()}>View {user.first_name}'s images</Button>
+    <Button variant="contained" onClick={() => handleViewImgClick()}>{`View {user.first_name}'s images`}</Button>
     </>
     
   );
