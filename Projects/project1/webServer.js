@@ -57,13 +57,26 @@ app.get('/user/list', (request, response) => {
 /**
  * URL /user/:id - Returns the information for User (id).
  */
-app.get('/user/:id', () => {
+app.get('/user/:id', (req, res) => {
+  const id = req.params.id;
+  const toRet = models.userModel(id);
+  if(toRet)
+    res.status(200).send(toRet);
+  else 
+    res.status(404);
 });
 
 /**
  * URL /photosOfUser/:id - Returns the Photos for User (id).
  */
-app.get('/photosOfUser/:id', () => {
+app.get('/photosOfUser/:id', (req, res) => {
+  //TODO
+  const id = req.params.id;
+  const toRet = models.photoOfUserModel(id);
+  if(toRet)
+    res.status(200).send(toRet);
+  else 
+    res.status(404);
 });
 
 const server = app.listen(portno, () => {

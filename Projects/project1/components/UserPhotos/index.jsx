@@ -36,7 +36,7 @@ function UserPhotos({ userId }) {
 
   const fetchUserInfo = async () => {
     try {
-     const response = await axios.get(`/user/${userId}`);
+     const response = await axios.get(`http://localhost:3001/user/${userId}`);
       if(response.data){
         console.log(response.data);
         setUser(response.data);
@@ -48,7 +48,7 @@ function UserPhotos({ userId }) {
 
   const fetchUserPhotos = async () => {
     try {
-      const response = await axios.get(`/photosOfUser/${userId}`);
+      const response = await axios.get(`http://localhost:3001/photosOfUser/${userId}`);
       if(response.data){
         console.log(response.data);
         setPhotos(response.data);

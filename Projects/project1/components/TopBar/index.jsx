@@ -30,7 +30,7 @@ function TopBar() {
     console.log("terms", terms);
     if(terms[1]){
       try {
-        const response = await axios.get(`/user/${terms[2]}`);
+        const response = await axios.get(`http://localhost:3001/user/${terms[2]}`);
         if(response.data){
           console.log("response data", response.data);
           if(terms[1] === "photos"){

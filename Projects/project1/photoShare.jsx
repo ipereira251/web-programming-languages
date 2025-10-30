@@ -8,7 +8,7 @@ import {
 
 import './styles/main.css';
 // Import mock setup - Remove this once you have implemented the actual API calls
-import './lib/mockSetup.js';
+//import './lib/mockSetup.js';
 import TopBar from './components/TopBar';
 import UserDetail from './components/UserDetail';
 import UserList from './components/UserList';
@@ -30,7 +30,6 @@ function PhotoShare() {
   return (
     <BrowserRouter>
       <div>
-        <p>hello</p>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TopBar />

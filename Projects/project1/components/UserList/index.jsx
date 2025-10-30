@@ -29,10 +29,11 @@ function UserList() {
 
   const fetchResults = async () => {
     try {
-      const response = await axios.get('/user/list');
+      const response = await axios.get('http://localhost:3001/user/list');
+      console.log(response);
       if (response.data) {
         setUsers(response.data);
-        console.log(response.data);
+        console.log("Response:", response.data); //////////////////////
         console.log("Fetched users.");
       } else {
         console.error("No users found.");

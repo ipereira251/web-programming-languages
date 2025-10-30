@@ -29,7 +29,7 @@ function UserDetail({ userId }) {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`/user/${userId}`);
+      const response = await axios.get(`http://localhost:3001/user/${userId}`);
       if(response.data){
         console.log(response.data);
         setUser(response.data);
@@ -45,7 +45,7 @@ function UserDetail({ userId }) {
 
   return (
     <>
-    <div> {/*TODO, add everything and style */}
+    <div> 
       <Typography variant="h5">
         {user.first_name} {user.last_name}
       </Typography>
