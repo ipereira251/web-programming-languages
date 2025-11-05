@@ -2,6 +2,7 @@ import Todo from '../models/todoModel.js' //importing model
 
 export async function getTodos(req, res) {
   const todos = await Todo.findById(req.body);
+  //Todo.find({user: userId});
   res.json(todos);
 };
 

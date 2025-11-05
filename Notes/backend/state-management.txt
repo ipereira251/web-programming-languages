@@ -1,0 +1,4 @@
+Types of states: 
+  local: one component 
+  shared: shared among component
+  server: from server APIs
