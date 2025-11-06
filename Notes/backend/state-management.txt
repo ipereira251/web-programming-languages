@@ -2,3 +2,40 @@ Types of states:
   local: one component 
   shared: shared among component
   server: from server APIs
+
+useContext as an alternative to prop drilling
+Steps: 
+  Create context 
+  Provide
+  Use 
+
+Use cases: 
+  Appearance
+  Auth status
+
+Example: Get/set username 
+const LoginContext = createContext(null);
+myApp(){
+  const [user, setUser] = useState(null);
+  return(
+    <LoginContext.Provider value={{user, setUser}}>
+      <Form />
+    </LoginContext.Provider>
+  )
+}
+function Form(){
+  return ( ... <LoginButton /> ...);
+}
+function LoginButton(){
+  const {currentUser, setCurrentUser} = useContext(LoginContext);
+  if(currentUser){
+    return <p>You're logged in as {currentUser.name}.</p>;
+  }
+  return(
+    //code to Auth
+    //set username using setCurrentUser
+  )
+}
+///State management libraries
+Use subscribe/notify pattern, components subscribe to functions/values and createStore notifies on change
+Zustand, focus on frontend states
