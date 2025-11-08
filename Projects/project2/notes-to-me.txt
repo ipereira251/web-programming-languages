@@ -2,4 +2,4 @@ npm run dev in main project directory
 make sure vite installed on computer lab computers
 npx eslint .
 
-mongosh mongodb://localhost:27017/
+mongosh mongodb://localhost:27017/project2
