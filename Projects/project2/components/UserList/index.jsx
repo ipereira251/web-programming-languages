@@ -29,16 +29,15 @@ function UserList() {
   const fetchResults = async () => {
     try {
       const response = await axios.get('http://localhost:3001/user/list');
-      console.log(response);
       if (response.data) {
         setUsers(response.data);
-        console.log("Response:", response.data); 
-        console.log("Fetched users.");
+        console.log("UserList: Response:", response.data); 
+        console.log("UserList: Fetched users.");
       } else {
-        console.error("No users found.");
+        console.error("UserList: No users found.");
       }
     } catch (err) {
-      console.error("Error fetching users: ", err);
+      console.error("UserList: Error fetching users: ", err);
     }
   };
 

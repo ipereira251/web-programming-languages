@@ -32,7 +32,7 @@ function TopBar() {
       try {
         const response = await axios.get(`http://localhost:3001/user/${terms[2]}`);
         if(response.data){
-          console.log("response data", response.data);
+          console.log("TopBar: response data", response.data);
           if(terms[1] === "photos"){
             setContext(`Photos of ${response.data.first_name} ${response.data.last_name}`);
           } else if(terms[1] === "users"){

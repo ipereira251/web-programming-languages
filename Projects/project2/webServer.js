@@ -11,15 +11,16 @@ import bluebird from "bluebird";
 import express from "express";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { ObjectId } from "mongodb";
 
 // ToDO - Your submission should work without this line. Comment out or delete this line for tests and before submission!
-import models from "./modelData/photoApp.js";
+//import models from "./modelData/photoApp.js";
 
 // Load the Mongoose schema for User, Photo, and SchemaInfo
 // ToDO - Your submission will use code below, so make sure to uncomment this line for tests and before submission!
-// import User from "./schema/user.js";
-// import Photo from "./schema/photo.js";
-// import SchemaInfo from "./schema/schemaInfo.js";
+import User from "./schema/user.js";
+import Photo from "./schema/photo.js";
+import SchemaInfo from "./schema/schemaInfo.js";
 
 const portno = 3001; // Port number to use
 const app = express();
@@ -60,8 +61,9 @@ app.get("/", function (request, response) {
  */
 
 app.get('/test/info', (request, response) => {
-  const info = models.schemaInfo();
-  response.status(200).send(info);
+  const info = SchemaInfo; //models.schemaInfo();
+  response.status(200).send(info.load_date_time);
+  console.log(info, "trying");
 });
 
 /**
@@ -69,7 +71,7 @@ app.get('/test/info', (request, response) => {
  *                in JSON format.
  */
 app.get('/test/counts', (request, response) => {
-  const users = models.userListModel();
+  /*const users = models.userListModel();
   let photoCount = 0;
   users.forEach((user) => {
     photoCount += models.photoOfUserModel(user._id).length;
@@ -78,37 +80,102 @@ app.get('/test/counts', (request, response) => {
     user: users.length,
     photo: photoCount,
     schemaInfo: 1
-  });
+  });*/
+
 });
 
 /**
  * URL /user/list - Returns all the User objects.
  */
-app.get('/user/list', (request, response) => {
-  response.status(200).send(models.userListModel());
+app.get('/user/list', async (request, response) => {
+  try{
+    const userModels = await User.find({});
+    const users = userModels.map((model) => {
+      return {
+        _id: model.id,
+        first_name: model.first_name,
+        last_name: model.last_name, 
+        location: model.location, 
+        description: model.description, 
+        occupation: model.occupation
+      };
+    });
+    response.status(200).json(users);
+  } catch (err){
+    console.error(err);
+    response.status(400).send("Internal server error");
+  }
 });
 
 /**
  * URL /user/:id - Returns the information for User (id).
  */
-app.get('/user/:id', (request, response) => {
-  const user = models.userModel(request.params.id);
-  if (!user) {
-    response.status(400).send("Not found");
-    return;
+app.get('/user/:id', async (request, response) => {
+  try{
+    const userModel = await User.findById(request.params.id);
+    const user = { 
+      _id: userModel.id, 
+      first_name: userModel.first_name, 
+      last_name: userModel.last_name, 
+      location: userModel.location, 
+      description: userModel.description,
+      occupation: userModel.occupation
+    };
+    response.status(200).json(user);
+  } catch (err){
+    console.error(err);
+    response.status(400).send("Internal server error");
   }
-  response.status(200).send(user);
 });
 
 /**
  * URL /photosOfUser/:id - Returns the Photos for User (id).
  */
-app.get('/photosOfUser/:id', (request, response) => {
-  const photos = models.photoOfUserModel(request.params.id);
-  if (!photos || photos.length === 0) {
-    return response.status(404).send({ error: 'Photos not found' });
+app.get('/photosOfUser/:id', async (request, response) => {
+  try{
+
+    if(!ObjectId.isValid(request.params.id)){
+      response.status(400);
+      return;
+    }
+    const userId = new ObjectId(request.params.id);
+    console.log("Userid, objid:", userId);
+
+    const photoModels = await Photo.aggregate([
+      { 
+        $match: { user_id: userId } 
+      }, {
+        $unwind: { path:`$comments`, preserveNullAndEmptyArrays: true }
+      }, {
+        $lookup: { //add commenters
+          from: 'users', 
+          localField: 'comments.user_id',
+          foreignField: '_id', 
+          as: 'commenter'
+        }
+      }, {
+        $addFields: {
+          'comments.user': { $first: `$commenter`}
+        }
+      }, {
+        $group: {
+          _id: `$_id`,
+          file_name: { $first: `$file_name` },
+          date_time: { $first: `$date_time` },
+          user_id: { $first: `$user_id` },
+          comments: { $push: `$comments` }
+        }
+      }, {
+        $sort: { date_time: -1 }
+      }
+    ]);
+    console.log("PhotoModels:", photoModels);
+
+    response.status(200).json(photoModels);
+  } catch (err){
+    console.error(err);
+    response.status(400).send("Internal server error");
   }
-  return response.status(200).send(photos);
 });
 
 const server = app.listen(portno, function () {

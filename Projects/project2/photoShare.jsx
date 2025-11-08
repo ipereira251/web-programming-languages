@@ -6,8 +6,6 @@ import {
 } from 'react-router-dom';
 
 import './styles/main.css';
-// Import mock setup - Remove this once you have implemented the actual API calls
-//import './lib/mockSetup.js';
 import TopBar from './components/TopBar';
 import UserDetail from './components/UserDetail';
 import UserList from './components/UserList';

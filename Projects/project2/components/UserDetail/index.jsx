@@ -34,7 +34,7 @@ function UserDetail({ userId }) {
         setUser(response.data);
       }
     } catch (err){
-      console.error("Error fetching user info: ", err);
+      console.error("UserDetail: Error fetching user info: ", err);
     }
   };
 
