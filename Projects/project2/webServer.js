@@ -147,23 +147,36 @@ app.get('/photosOfUser/:id', async (request, response) => {
       }, {
         $unwind: { path:`$comments`, preserveNullAndEmptyArrays: true }
       }, {
+        $lookup: { //add original poster
+          from: 'users', 
+          localField: 'user_id',
+          foreignField: '_id',
+          pipeline: [ { $project: { location: 0, description: 0, occupation: 0 } } ], 
+          as: 'original_poster'
+        }
+      }, {
+        $addFields: {
+          'original_poster': { $first: `$original_poster` }
+        }
+      }, {
         $lookup: { //add commenters
           from: 'users', 
           localField: 'comments.user_id',
           foreignField: '_id', 
+          pipeline: [ { $project: { location: 0, description: 0, occupation: 0 } } ], 
           as: 'commenter'
         }
       }, {
         $addFields: {
-          'comments.user': { $first: `$commenter`}
+          'comments.user': { $first: `$commenter`}, 
         }
       }, {
         $group: {
           _id: `$_id`,
           file_name: { $first: `$file_name` },
           date_time: { $first: `$date_time` },
-          user_id: { $first: `$user_id` },
-          comments: { $push: `$comments` }
+          comments: { $push: `$comments` },
+          original_poster: { $first: `$original_poster` }
         }
       }, {
         $sort: { date_time: -1 }

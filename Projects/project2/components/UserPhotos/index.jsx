@@ -45,17 +45,22 @@ function UserPhotos({ userId }) {
   }
 
   return (
-    <List>
-      {photos ? (
-        photos.map((photo) => (
-          <ListItem key={photo._id}>
-            <PhotoCard photoInfo={photo} />
-          </ListItem>
-        ))
-      ) : (
-        <Typography variant="body1"> </Typography>
-      )}
-    </List>
+    <>
+      {/* Arrow */}
+      <List>
+        {photos ? (
+          photos.map((photo) => (
+            <ListItem key={photo._id}>
+              <PhotoCard photoInfo={photo} />
+            </ListItem>
+          ))
+        ) : (
+          <Typography variant="body1"> </Typography>
+        )}
+      </List>
+      {/* Arrow */}
+    </>
+
   );
 }
 
