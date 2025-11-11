@@ -6,14 +6,7 @@ import './styles.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-/* components/UserDetail component is passed a userId in the props by 
-React Router. The view should display the details of the user in a 
-pleasing way ---DONE
-along with a link to switch the view area to the photos 
-of the user using the UserPhotos component. ----DONE
-*/
-
-function UserDetail({ userId }) {
+function UserDetail({ userId, advEnabled }) {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -23,7 +16,10 @@ function UserDetail({ userId }) {
 
   const handleViewImgClick = () => {
     console.log("Clicked to view images from userId", userId);
-    navigate(`/photos/${userId}`);
+    if(advEnabled)
+      navigate(`/photos/${userId}/0`);
+    else
+      navigate(`/photos/${userId}`);
   }
 
   const fetchUserInfo = async () => {
@@ -63,6 +59,7 @@ function UserDetail({ userId }) {
 
 UserDetail.propTypes = {
   userId: PropTypes.string.isRequired,
+  advEnabled: PropTypes.bool.isRequired
 };
 
 export default UserDetail;

@@ -1,26 +1,14 @@
 import { React, useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
-
-/*
-    The left side of the TopBar should have your name. ---DONE
-
-    The right side of the TopBar should provide app context by 
-    reflecting what is being shown in the main content region. 
-    For example, if the main content is displaying details on 
-    a user, the TopBar should have the user's name. If it is 
-    displaying a user's photos it should say "Photos of " and 
-    the user's name.------------DONE
-*/
-
-
+import { AppBar, Checkbox, FormControlLabel, Toolbar, Typography } from '@mui/material';
 import './styles.css';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-function TopBar() {
+function TopBar({ advEnabled, toggleAdvEnabled }) {
   const [context, setContext] = useState("Home");
   const location = useLocation();
-
+  
   useEffect(() => {
     getUserFromUrl(location.pathname);
   }, [location]);
@@ -51,14 +39,25 @@ function TopBar() {
         <Typography variant="h5" color="inherit" className="topbar-name">
           Isabella Pereira
         </Typography>
+
+        <FormControlLabel control={
+          <Checkbox checked={advEnabled} onChange={toggleAdvEnabled} color="default" />
+          } label="Advanced Features" />
+
         {context && 
           <Typography variant="h5">
             {context}
-          </Typography>}
+          </Typography>
+        }
         
       </Toolbar>
     </AppBar>
   );
+}
+
+TopBar.propTypes = {
+  advEnabled: PropTypes.bool.isRequired,
+  toggleAdvEnabled: PropTypes.func.isRequired
 }
 
 export default TopBar;

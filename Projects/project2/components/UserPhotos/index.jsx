@@ -1,71 +1,65 @@
 import { React, useState, useEffect } from 'react';
 import { Typography, List, ListItem } from '@mui/material';
-import PhotoCard from "./PhotoCard";
+import PhotoCard from "../PhotoCard";
+import PhotoDetail from "../PhotoDetail";
 import PropTypes from 'prop-types';
-
 import './styles.css';
 import axios from 'axios';
 
-/* components/UserPhotos component is passed a userId, and should display 
-all the photos of the specified user. ----DONE
-It must display all of the photos belonging to that user. ---DONE
-For each photo you must display the photo itself, ---DONE
-the creation date/time for the photo, ---DONE
-and all of the comments for that photo. ----DONE
-For each comment you must display the date/time ---DONE 
-the name of the user who created the comment ----DONE
-and the text of the comment. ----DONE 
-The creator for each comment should be a link that can 
-be clicked to switch to the user detail page for that user. ----DONE
-The date/time for photos and comments should be formatted as 
-user-friendly strings and not as raw JavaScript dates. -----DONE
-
-*/
-
-function UserPhotos({ userId }) {
+function UserPhotos({ userId, advEnabled }) {
   const [photos, setPhotos] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    fetchUserPhotos();
+    setLoading(true);
+    if(!advEnabled)
+      fetchUserPhotos();
+    else if(advEnabled)
+      return <PhotoDetail userId={userId} initialIndex={0} advEnabled={advEnabled} />;
+    console.log("UserPhotos:", photos);
+
+
   }, [userId]);
 
   const fetchUserPhotos = async () => {
-    console.log("User photos: checking", userId);
     try {
       const response = await axios.get(`http://localhost:3001/photosOfUser/${userId}`);
-      console.log(response);
+      
       if(response.data){
-        console.log("UserPhotos:", response.data);
-        const photos = response.data;
-        setPhotos(photos);
+        console.log("Response data:", response.data);
+        setPhotos(response.data);
       }
+      setLoading(false);
     } catch (err) {
       console.error("UserPhotos: Error fetching photos: ", err);
+      setLoading(false);
     }
   }
 
   return (
     <>
-      {/* Arrow */}
-      <List>
-        {photos ? (
-          photos.map((photo) => (
-            <ListItem key={photo._id}>
-              <PhotoCard photoInfo={photo} />
-            </ListItem>
-          ))
-        ) : (
-          <Typography variant="body1"> </Typography>
-        )}
-      </List>
-      {/* Arrow */}
+      {advEnabled && photos.length > 0 ? (
+        <PhotoDetail userId={userId} photos={photos} initialIndex={0} advEnabled={advEnabled} />
+      ) : (
+        <List>
+          {photos.length > 0 ? (
+            photos.map((photo) => (
+              <ListItem key={photo._id}>
+                <PhotoCard photoInfo={photo} />
+              </ListItem>
+            ))
+          ) : (
+            <Typography variant="body1">No photos found. </Typography>
+          )}
+        </List>
+      )}
     </>
-
   );
 }
 
 UserPhotos.propTypes = {
   userId: PropTypes.string.isRequired,
+  advEnabled: PropTypes.bool.isRequired
 };
 
 export default UserPhotos;
