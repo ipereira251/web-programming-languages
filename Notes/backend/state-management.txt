@@ -39,3 +39,16 @@ function LoginButton(){
 ///State management libraries
 Use subscribe/notify pattern, components subscribe to functions/values and createStore notifies on change
 Zustand, focus on frontend states
+
+useQuery: 
+  Fetches data on component mount
+  Caches to avoid re-fetch, only when stale
+  Manages loading/error states automatically
+  Synchronization across components
+QueryFn must return a promise which resolves to data
+
+useMutation: 
+  Used to change DB data
+  Must be called manually each time
+  mutationFn and onSuccess to be defined
+  onSuccess example: on uploading photo, invalidateQueries for number of photos a user has
