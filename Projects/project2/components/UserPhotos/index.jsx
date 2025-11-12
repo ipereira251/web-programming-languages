@@ -41,17 +41,17 @@ function UserPhotos({ userId, advEnabled }) {
       {advEnabled && photos.length > 0 ? (
         <PhotoDetail userId={userId} photos={photos} initialIndex={0} advEnabled={advEnabled} />
       ) : (
-        <List>
+        <div className="photo-card-container">
           {photos.length > 0 ? (
             photos.map((photo) => (
-              <ListItem key={photo._id}>
+              <div className="photo-card" key={photo._id}>
                 <PhotoCard photoInfo={photo} />
-              </ListItem>
+              </div>
             ))
           ) : (
             <Typography variant="body1">No photos found. </Typography>
           )}
-        </List>
+        </div>
       )}
     </>
   );

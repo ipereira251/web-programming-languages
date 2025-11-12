@@ -15,7 +15,6 @@ function TopBar({ advEnabled, toggleAdvEnabled }) {
 
   const getUserFromUrl = async (url) => {
     const terms = url.split("/");
-    console.log("terms", terms);
     if(terms[1]){
       try {
         const response = await axios.get(`http://localhost:3001/user/${terms[2]}`);

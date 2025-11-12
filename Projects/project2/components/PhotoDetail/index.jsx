@@ -5,19 +5,23 @@ import { IconButton } from '@mui/material';
 import PhotoCard from '../PhotoCard';
 import './styles.css';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 function PhotoDetail({ userId, initialIndex, advEnabled }){
   const [photos, setPhotos] = useState([]);
-  if(!initialIndex){
-    initialIndex = 0;
-  }
-  const [currentIndex, setCurrentIndex] = useState(initialIndex);
+  const location = useLocation();
+
+  const [currentIndex, setCurrentIndex] = useState(initialIndex || 0);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();    
 
 
   useEffect(() => {
+    if(!initialIndex){
+      parseIndex(location);
+    }
     console.log("Photodetail Props", userId, initialIndex, advEnabled);
+    
     if(!advEnabled){
       console.log("Tried to view single image without Adv on");
       const path = `/photos/${userId}`; //regular photo list
@@ -27,6 +31,9 @@ function PhotoDetail({ userId, initialIndex, advEnabled }){
     if(userId && advEnabled){
       fetchUserPhotos();
       console.log(window.location.pathname);
+      if(currentIndex === undefined){
+        setCurrentIndex(initialIndex);
+      }
       const path = `/photos/${userId}/${currentIndex}`;
       console.log("Current index:", currentIndex);
       if(window.location.pathname !== path)
@@ -35,13 +42,21 @@ function PhotoDetail({ userId, initialIndex, advEnabled }){
     console.log("PHOTODETAIL:", userId, initialIndex, currentIndex);
   }, [userId, currentIndex, advEnabled, navigate]);
 
+  const parseIndex = (location) => {
+    const terms = location.pathname.split("/");
+    console.log("terms", terms);
+    if(terms[3] === "")
+      initialIndex = 0;
+    else
+      initialIndex = terms[3];
+  }
 
   const fetchUserPhotos = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/photosOfUser/${userId}`);
       console.log(response);
       if(response.data){
-        setPhotos(response.data); //setPhotos later
+        setPhotos(response.data);
         setLoading(false);
       }
     } catch (err) {
@@ -56,10 +71,10 @@ function PhotoDetail({ userId, initialIndex, advEnabled }){
   }
 
   const goToNext = () => {
-    console.log("go to next: ", currentIndex);
     if(currentIndex < photos.length - 1){
       setCurrentIndex(currentIndex + 1);
     }
+    console.log("go to next: ", currentIndex);
   }
   
   if(!userId || photos.length === 0 || currentIndex === undefined){

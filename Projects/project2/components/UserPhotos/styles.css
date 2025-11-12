@@ -1,31 +1,7 @@
-.image-container{
-  font-family: "Roboto","Helvetica","Arial",sans-serif;
+.photo-card-container {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.image-section{
-  display: block;
-  align-items: center;
-}
-.comment-section{
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-}
-.comment-indiv{
-  padding: 10px 0px;
-}
-img{
-  max-width: 400px;
-}
-.user-name-button.MuiButton-text{
-  padding: 0px;
-}
-.date-time, .no-comment-text{
-  color: gray;
-}
-.date-time-comment{
-  font-size: 0.875rem;
-  padding: 0px 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
 }

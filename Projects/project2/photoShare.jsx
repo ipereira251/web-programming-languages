@@ -12,6 +12,7 @@ import UserList from './components/UserList';
 import UserPhotos from './components/UserPhotos';
 import PhotoDetail from './components/PhotoDetail';
 import PropTypes from 'prop-types';
+import CommentDetail from './components/CommentDetail';
 
 function UserDetailRoute({advEnabled}) {
   const { userId } = useParams();
@@ -25,13 +26,18 @@ function UserPhotosRoute({advEnabled}) {
   return <UserPhotos userId={userId} advEnabled={advEnabled}/>;
 }
 
-function UserListRoute(){
-
+function UserListRoute({advEnabled}){
+  return <UserList advEnabled={advEnabled} />;
 }
 
 function PhotoDetailRoute({advEnabled}){
   const { userId, photoId } = useParams();
   return <PhotoDetail userId={userId} photoId={photoId} advEnabled={advEnabled}/>;
+}
+
+function CommentDetailRoute({advEnabled}){
+  const { userId } = useParams();
+  return <CommentDetail userId={userId} advEnabled={advEnabled}/>;
 }
 
 function PhotoShare() {
@@ -55,7 +61,7 @@ function PhotoShare() {
           <div className="main-topbar-buffer" />
           <Grid item sm={3}>
             <Paper className="main-grid-item">
-              <UserList />
+              <UserList advEnabled={advEnabled}/>
             </Paper>
           </Grid>
           <Grid item sm={9}>
@@ -64,7 +70,8 @@ function PhotoShare() {
                 <Route path="/users/:userId" element={<UserDetailRoute advEnabled={advEnabled}/>} />
                 <Route path="/photos/:userId" element={<UserPhotosRoute advEnabled={advEnabled}/>} />
                 <Route path="/photos/:userId/:index" element={<PhotoDetailRoute advEnabled={advEnabled}/>} />
-                <Route path="/users" element={<UserList />} />
+                <Route path="/comments/:userId" element={<CommentDetailRoute advEnabled={advEnabled}/>} />
+                <Route path="/users" element={<UserListRoute advEnabled={advEnabled} />} />
               </Routes>
             </Paper>
           </Grid>
@@ -83,6 +90,14 @@ UserPhotosRoute.propTypes = {
 }
 
 PhotoDetailRoute.propTypes = {
+  advEnabled: PropTypes.bool.isRequired
+}
+
+CommentDetailRoute.propTypes = {
+  advEnabled: PropTypes.bool.isRequired
+}
+
+UserListRoute.propTypes = {
   advEnabled: PropTypes.bool.isRequired
 }
 

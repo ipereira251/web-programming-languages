@@ -55,7 +55,7 @@ function UserDetail({ userId }) {
         {user.description}
       </Typography>
     </div>
-    <Button variant="contained" onClick={() => handleViewImgClick()}>{`View {user.first_name}'s images`}</Button>
+    <Button variant="contained" onClick={() => handleViewImgClick()}>{`View ${user.first_name}'s images`}</Button>
     </>
     
   );

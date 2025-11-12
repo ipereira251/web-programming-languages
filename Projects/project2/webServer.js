@@ -62,7 +62,7 @@ app.get("/", function (request, response) {
 
 app.get('/test/info', (request, response) => {
   const info = SchemaInfo; //models.schemaInfo();
-  response.status(200).send(info.load_date_time);
+  response.status(200).send(info);
   console.log(info, "trying");
 });
 
@@ -70,18 +70,16 @@ app.get('/test/info', (request, response) => {
  * /test/counts - Returns an object with the counts of the different collections
  *                in JSON format.
  */
-app.get('/test/counts', (request, response) => {
-  /*const users = models.userListModel();
-  let photoCount = 0;
-  users.forEach((user) => {
-    photoCount += models.photoOfUserModel(user._id).length;
-  });
-  response.status(200).send({
-    user: users.length,
-    photo: photoCount,
-    schemaInfo: 1
-  });*/
-
+app.get('/test/counts', async (request, response) => {
+  try{
+    const photoModels = await Photo.find({});
+    console.log("PhotoModels:", photoModels, photoModels.length);
+    let photoCount = photoModels.length;
+    response.status(200).json(photoCount);
+  } catch(err){
+    console.error(err);
+    response.status(400).send("Internal server error");
+  }
 });
 
 /**
@@ -94,13 +92,12 @@ app.get('/user/list', async (request, response) => {
       return {
         _id: model.id,
         first_name: model.first_name,
-        last_name: model.last_name, 
-        location: model.location, 
-        description: model.description, 
-        occupation: model.occupation
+        last_name: model.last_name
       };
     });
-    response.status(200).json(users);
+    const toRet = users.flat();
+    response.status(200).json(toRet);
+    console.log(toRet);
   } catch (err){
     console.error(err);
     response.status(400).send("Internal server error");
@@ -141,55 +138,147 @@ app.get('/photosOfUser/:id', async (request, response) => {
     const userId = new ObjectId(request.params.id);
     console.log("Userid, objid:", userId);
 
-    const photoModels = await Photo.aggregate([
-      { 
-        $match: { user_id: userId } 
+    const photos = await Photo.aggregate([
+      {
+        $match: { user_id: userId }
       }, {
-        $unwind: { path:`$comments`, preserveNullAndEmptyArrays: true }
+        $unwind: { path:`$comments`, preserveNullAndEmptyArrays: true}
       }, {
-        $lookup: { //add original poster
+        $lookup: {
           from: 'users', 
-          localField: 'user_id',
-          foreignField: '_id',
-          pipeline: [ { $project: { location: 0, description: 0, occupation: 0 } } ], 
-          as: 'original_poster'
-        }
-      }, {
-        $addFields: {
-          'original_poster': { $first: `$original_poster` }
-        }
-      }, {
-        $lookup: { //add commenters
-          from: 'users', 
-          localField: 'comments.user_id',
+          localField: 'comments.user_id', 
           foreignField: '_id', 
-          pipeline: [ { $project: { location: 0, description: 0, occupation: 0 } } ], 
+          pipeline: [ {$project: {first_name: 1, last_name: 1}}],
           as: 'commenter'
         }
       }, {
         $addFields: {
-          'comments.user': { $first: `$commenter`}, 
+          "comments.user": { $arrayElemAt: ["$commenter", 0]}
         }
       }, {
         $group: {
-          _id: `$_id`,
+          _id: `$_id`, 
           file_name: { $first: `$file_name` },
           date_time: { $first: `$date_time` },
           comments: { $push: `$comments` },
-          original_poster: { $first: `$original_poster` }
+          user_id: { $first: `$user_id` }
         }
       }, {
         $sort: { date_time: -1 }
       }
     ]);
-    console.log("PhotoModels:", photoModels);
-
-    response.status(200).json(photoModels);
+    console.log("PhotoModels:", photos);
+    if(!photos)
+      response.status(404).send("No user found");
+    else
+      response.status(200).json(photos);
   } catch (err){
     console.error(err);
     response.status(400).send("Internal server error");
   }
 });
+
+/**
+ * URL /counts/:id - Returns the number of comments and photos by User (id).
+ */
+app.get('/counts/:id', async (request, response) => {
+  try{
+    const userId = new ObjectId(request.params.id);
+    const photoModels = await Photo.aggregate([
+      {
+        $match: {
+          $or: [
+            { user_id: userId }, 
+            { "comments.user_id": userId }
+          ]
+        }
+      }, {
+        $group: {
+          _id: userId, 
+          photoCount: {
+            $sum: {
+              $cond: [{ $eq: [`$user_id`, userId]}, 1, 0]
+            }
+          }, 
+          commentCount: {
+            $sum: {
+              $size: {
+                $filter: {
+                  input: "$comments", 
+                  as: "comment", 
+                  cond: { $eq: ["$$comment.user_id", userId] }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]);
+    response.status(200).json(photoModels);
+    
+  } catch(err){
+    console.error(err);
+    response.status(400).send("Internal server error");
+  }
+});
+
+/**
+ * URL /comments/:id - Returns the comments made by User (id).
+ */
+app.get('/comments/:id', async (request, response) => {
+  try{
+    const userId = new ObjectId(request.params.id);
+    const comments = await Photo.aggregate([
+      { 
+        $unwind: "$comments" 
+      }, { 
+        $match: { "comments.user_id": userId } 
+      }, {
+        $lookup: {
+          from: "users", 
+          localField: "comments.user_id", 
+          foreignField: "_id", 
+          as: "commenter"
+        }
+      }, {
+        $unwind: "$commenter"
+      }, {
+        $lookup: {
+          from: "photos", 
+          let: { posterId: "$user_id" }, 
+          pipeline: [
+            { $match: {$expr: {$eq: ["$user_id", "$$posterId"]}}}, 
+            { $sort: {date_time: -1}}, 
+            { $project: { _id: 1 }}
+          ], 
+          as: "allPostersPhotos"
+        }
+      }, {
+        $addFields: {
+          photoIndexInPosters: { $indexOfArray: ["$allPostersPhotos._id", "$_id"]}
+        }
+      }, {
+        $project: {
+          _id: 1, 
+          commentId: "$comments._id",
+          photoFileName: "$file_name",
+          commenterId: "$comments.user_id",
+          commenterFirstName: "$commenter.first_name",
+          commenterLastName: "$commenter.last_name",
+          comment: "$comments.comment",
+          date_time: "$comments.date_time", 
+          photoIndexInPosters: 1, 
+          originalPostersId: "$user_id"
+        }
+      }
+    ]);
+    console.log("COMMENTS", comments);
+    response.status(200).json(comments);
+  } catch(err){
+    console.error(err);
+  }
+});
+
 
 const server = app.listen(portno, function () {
   const port = server.address().port;
