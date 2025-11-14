@@ -1,0 +1,7 @@
+Same Origin Policy: 
+  origin is <protocol, domain, port> 
+  to restrictive, even web fonts are blocked
+
+Defenses against CSRF:
+  CSRF tokens
+  SameSite cookies

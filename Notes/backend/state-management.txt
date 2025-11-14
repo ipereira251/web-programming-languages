@@ -52,3 +52,5 @@ useMutation:
   Must be called manually each time
   mutationFn and onSuccess to be defined
   onSuccess example: on uploading photo, invalidateQueries for number of photos a user has
+
+express-async-handler to hide try/catches
